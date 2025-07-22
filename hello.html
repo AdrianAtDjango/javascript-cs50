@@ -5,10 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello JS</title>
     <script>
-        alert('Hello, World!');
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('form').onsubmit = function() {
+                const nome = document.querySelector('#nome').value;
+                alert(`Olá, ${nome}`)
+            };
+        });
     </script>
 </head>
 <body>
-    <h1>Hello!</h1>
+    <h1>Olá!</h1>
+    <form>
+        <input autofocus id="nome" placeholder="Nome" type="text" required>
+        <button type="submit">Enviar</button>
+    </form>
 </body>
 </html>
