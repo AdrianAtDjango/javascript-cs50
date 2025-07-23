@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moedas</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('form').onsubmit = function() {
+                fetch('https://api.exchangeratesapi.io/v1/latest?access_key=0badd1dd8515879fd2ce35dac9323f8d&format=1')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    const moeda = document.querySelector('#moeda').value.toUpperCase();
+                    const rate = data.rates[moeda]
+                    if (rate !== undefined) {
+                        document.querySelector('#resultado').innerHTML = `1 Euro é igual à ${rate.toFixed(2)} ${moeda}.`;
+                    } else {
+                        document.querySelector('#resultado').innerHTML = 'Moeda Inválida.'
+                    }
+                })
+                
+                .catch(error => {
+                    console.log('Erro', error);
+                });
+
+                return false;
+            }
+        });
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="Moeda" id="moeda">
+        <input type="submit" value="Converter">
+    </form>
+    <h1 id="resultado">
+
+    </h1>
+</body>
+</html>

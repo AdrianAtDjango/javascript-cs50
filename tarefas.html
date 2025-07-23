@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Por padrão, o botão de submeter será desabilitado
+            document.querySelector('#submit').disabled = true;
+
+            document.querySelector('#tarefa').onkeyup = () => {
+                if (document.querySelector('#tarefa').value.leght > 0){
+                    document.querySelector('#submit').disabled = false;
+                } else {
+                    document.querySelector('#submit').disabled = true;
+                }
+            }
+
+            document.querySelector('form').onsubmit = () => {
+                const tarefa = document.querySelector('#tarefa').value;
+                const li = document.createElement('li');
+                li.innerHTML = tarefa;
+                document.querySelector('#tarefas').append(li);
+                document.querySelector('#tarefa').value = '';
+                document.querySelector('#submit').disabled = true;
+
+                // Faz o formulário não atualizar a página
+                return false;
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Tarefas</h1>
+    <ul id="tarefas">
+
+    </ul>
+    <form>
+        <input id="tarefa" placeholder="Nova Tarefa" type="text">
+        <input type="submit" id="submit">
+    </form>
+</body>
+</html>
